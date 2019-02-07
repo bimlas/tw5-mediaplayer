@@ -1,0 +1,14 @@
+tags: $:/tags/Macro
+title: $:/plugins/bimlas/mediaplayer/mediaplayer
+type: text/vnd.tiddlywiki
+
+\define mediaplayer()
+  [[Mediaplayer|$:/plugins/bimlas/mediaplayer]]<br/>
+  <$button class="tc-btn-invisible" setTitle="$:/state/bimlas/mediaplayer" setIndex="jump" setTo="prev">{{$:/plugins/bimlas/mediaplayer/images/backward.svg}}</$button>
+  <$button class="tc-btn-invisible" setTitle="$:/state/bimlas/mediaplayer" setIndex="play-pause" setTo="yes">{{$:/plugins/bimlas/mediaplayer/images/play.svg}}</$button>
+  <$button class="tc-btn-invisible" setTitle="$:/state/bimlas/mediaplayer" setIndex="jump" setTo="next">{{$:/plugins/bimlas/mediaplayer/images/forward.svg}}</$button>
+  <$checkbox tiddler="$:/state/bimlas/mediaplayer" index="repeat" checked="yes" unchecked="no" default="no">
+    <$button class="tc-btn-invisible">{{$:/plugins/bimlas/mediaplayer/images/repeat.svg}}</$button>
+  </$checkbox><br/>
+  <$mediaplayer-updater/>
+\end

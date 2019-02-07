@@ -1,0 +1,26 @@
+:demo-page: https://bimlas.gitlab.io/tw5-mediaplayer/
+:json: https://bimlas.gitlab.io/tw5-mediaplayer/tw5-mediaplayer.json
+
+= Mediaplayer plugin for TiddlyWiki 5
+
+For details, see the link:{demo-page}[demo page].
+
+* https://gitlab.com/bimlas/tw5-mediaplayer/ (official repository)
+* https://github.com/bimlas/tw5-mediaplayer/ (mirror, please star if you like ity)
+
+== How to install?
+
+=== Drag-n-drop
+
+- Open the link:{demo-page}[demo page]
+- Drag-n-drop the plugin tiddler in to your wiki
+
+=== Download as JSON
+
+- Download the link:{json}[JSON archive of the plugin] (_Right click -> Save as_)
+- Drag-n-drop the file in to your wiki
+
+=== Copy to directory based (Node.js) wiki
+
+- Clone or download this repository
+- Copy the `plugins` directory to the root directory of your wiki
