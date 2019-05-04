@@ -4,7 +4,6 @@ variables:
   TIDDLYWIKI_PLUGIN_PATH: ./plugins
 
 pages:
-  stage: pages
   script:
     - npm install -g tiddlywiki
     # Generate as index.html: single HTML demo page
