@@ -74,9 +74,8 @@ Play music, video continuously, without interruption.
 				return;
 			}
 
-			// Stop and seek to the beginning of the media
 			this._currentPlayer.pause();
-			this._currentPlayer.load();
+			this._currentPlayer.currentTime = 0;
 
 			if((shouldJumpTrack === "next") && this._currentPlayer.nextPlayer) {
 				this._currentPlayer.nextPlayer.play();
