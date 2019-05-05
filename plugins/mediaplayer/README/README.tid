@@ -6,8 +6,8 @@ type: text/vnd.tiddlywiki
 
 Play music, video continuously, without interruption.
 
-* https://gitlab.com/bimlas/tw5-mediaplayer
-* https://github.com/bimlas/tw5-mediaplayer
+* https://gitlab.com/bimlas/tw5-mediaplayer (main repository)
+* https://github.com/bimlas/tw5-mediaplayer (mirror, please star if you like it)
 
 ''Currently works only with audio player.''
 
