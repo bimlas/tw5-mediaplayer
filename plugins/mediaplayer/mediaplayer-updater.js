@@ -35,22 +35,24 @@ Play music, video continuously, without interruption.
 		var shouldPlayPause = this.wiki.extractTiddlerDataItem(this._stateTiddler,'play-pause','') === 'yes';
 		var shouldJumpTrack = this.wiki.extractTiddlerDataItem(this._stateTiddler,'jump','');
 
-		if(players.length) {
-			for(var i = 0; i < players.length; i++) {
-				players[i].addEventListener('playing',function() {
-					self._currentPlayer = this;
-				});
-				players[i].nextPlayer = players[i + 1];
-				players[i].prevPlayer = players[i + -1];
-				players[i].addEventListener('ended',function() {
-					if(this.nextPlayer) {
-						this.nextPlayer.play();
-					}
-				});
-			}
-			players[players.length - 1].nextPlayer = shouldRepeat ? players[0] : undefined;
-			players[0].prevPlayer = shouldRepeat ? players[players.length - 1] : undefined;
+		if(!players.length) {
+			return;
 		}
+
+		for(var i = 0; i < players.length; i++) {
+			players[i].addEventListener('playing',function() {
+				self._currentPlayer = this;
+			});
+			players[i].nextPlayer = players[i + 1];
+			players[i].prevPlayer = players[i + -1];
+			players[i].addEventListener('ended',function() {
+				if(this.nextPlayer) {
+					this.nextPlayer.play();
+				}
+			});
+		}
+		players[players.length - 1].nextPlayer = shouldRepeat ? players[0] : undefined;
+		players[0].prevPlayer = shouldRepeat ? players[players.length - 1] : undefined;
 
 		if(shouldPlayPause) {
 			data["play-pause"] = '';
