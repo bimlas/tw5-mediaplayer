@@ -4,6 +4,13 @@ type: text/vnd.tiddlywiki
 
 I'm trying to follow the rules of [[Semantic Versioning|https://semver.org/]].
 
+!! 0.1.1
+
+[[See GitLab for detailed change history of this release|https://gitlab.com/bimlas/tw5-disqus/compare/v0.1.0...v0.1.1]]
+
+* Do not reload media when jumping to another one
+* Fix RSOD: do nothing if there is no media files opened
+
 !! 0.1.0
 
 * First public release
