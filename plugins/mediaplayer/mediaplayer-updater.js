@@ -9,7 +9,7 @@ Play music, video continuously, without interruption.
 (function() {
 
 	/*jslint node: true, browser: true */
-	/*global $tw: false */
+	/*global $tw: true */
 	"use strict";
 
 	var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -23,95 +23,73 @@ Play music, video continuously, without interruption.
 	*/
 	MediaplayerUpdaterWidget.prototype = new Widget();
 
-	MediaplayerUpdaterWidget.prototype._stateTiddler = "$:/state/bimlas/mediaplayer";
-	MediaplayerUpdaterWidget.prototype._previousStoryList = '';
-	MediaplayerUpdaterWidget.prototype._currentPlayer = undefined;
-
-	MediaplayerUpdaterWidget.prototype._updatePlayers = function() {
-		var self = this;
-		var data = this.wiki.getTiddlerData(this._stateTiddler, {});
-		var players = document.getElementsByTagName('audio');
-		var shouldRepeat = this.wiki.extractTiddlerDataItem(this._stateTiddler,'repeat','no') === 'yes';
-		var shouldPlayPause = this.wiki.extractTiddlerDataItem(this._stateTiddler,'play-pause','') === 'yes';
-		var shouldJumpTrack = this.wiki.extractTiddlerDataItem(this._stateTiddler,'jump','');
-
-		if(!players.length) {
+	MediaplayerUpdaterWidget.prototype._play = function(tiddlerTitle) {
+		if(!tiddlerTitle) {
+			this._player.pause();
+			this._player.currentTime = 0;
+			this._player.source = undefined;
+			this._player._tiddler = undefined;
 			return;
 		}
 
-		for(var i = 0; i < players.length; i++) {
-			players[i].addEventListener('playing',function() {
-				self._currentPlayer = this;
-			});
-			players[i].nextPlayer = players[i + 1];
-			players[i].prevPlayer = players[i + -1];
-			players[i].addEventListener('ended',function() {
-				if(this.nextPlayer) {
-					this.nextPlayer.play();
-				}
-			});
-		}
-		players[players.length - 1].nextPlayer = shouldRepeat ? players[0] : undefined;
-		players[0].prevPlayer = shouldRepeat ? players[players.length - 1] : undefined;
+		var tiddler = this.wiki.getTiddler(tiddlerTitle);
 
-		if(shouldPlayPause) {
-			data["play-pause"] = '';
-			this.wiki.setTiddlerData(this._stateTiddler, data);
+		this._player._tiddler = tiddler.fields.title;
+		this._player.src = tiddler.fields._canonical_uri || tiddler.fields.title;
+		this._player.currentTime = 0;
+		this._player.play();
+	};
 
-			if(!this._currentPlayer) {
-				this._currentPlayer = document.querySelector('audio');
-			}
-			if(this._currentPlayer.paused) {
-				this._currentPlayer.play();
-			} else {
-				this._currentPlayer.pause();
-			}
+	MediaplayerUpdaterWidget.prototype._jump = function(direction = 1) {
+		// TODO: Store filter in a common place
+		var playlist = this.wiki.filterTiddlers("[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]");
+
+		if(!playlist) return;
+
+		var tiddler = playlist[playlist.indexOf(this._player._tiddler) + direction];
+		var shouldRepeat = this.wiki.getTiddlerData(this._stateTiddler, {}).repeat === 'yes';
+		if(!tiddler && shouldRepeat) {
+			tiddler = direction === 1 ? playlist[0] : playlist[playlist.length-1];
 		}
 
-		if(shouldJumpTrack) {
-			data.jump = '';
-			this.wiki.setTiddlerData(this._stateTiddler, data);
-
-			if(!this._currentPlayer) {
-				return;
-			}
-
-			this._currentPlayer.pause();
-			this._currentPlayer.currentTime = 0;
-
-			if((shouldJumpTrack === "next") && this._currentPlayer.nextPlayer) {
-				this._currentPlayer.nextPlayer.play();
-			} else if((shouldJumpTrack === "prev") && this._currentPlayer.prevPlayer) {
-				this._currentPlayer.prevPlayer.play();
-			} else {
-				this._currentPlayer = undefined;
-			}
-		}
-
+		this._play(tiddler);
 	};
 
 	/*
 	Render this widget into the DOM
 	*/
 	MediaplayerUpdaterWidget.prototype.render = function(parent,nextSibling) {
+		this.parentDomNode = parent;
+		this.computeAttributes();
+		this.execute();
+		parent.insertBefore(this._player,nextSibling);
+		this.domNodes.push(this._player);
 	};
 
 	/*
 	Compute the internal state of the widget
 	*/
 	MediaplayerUpdaterWidget.prototype.execute = function() {
-	};
+		var self = this;
 
-	/*
-	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-	*/
-	MediaplayerUpdaterWidget.prototype.refresh = function(changedTiddlers) {
-		var currentStoryList = this.wiki.getTiddlerList('$:/StoryList').toString();
-		if((this._stateTiddler in changedTiddlers) || (currentStoryList !== this._previousStoryList)) {
-			this._updatePlayers();
-			this._previousStoryList = currentStoryList;
-		}
-		return false;
+		this._stateTiddler = "$:/state/bimlas/mediaplayer";
+		this._player = this.document.createElement("video");
+		this._player.controls = true;
+		this._player.id = "bimlas-mediaplayer-widget";
+
+		this._player.addEventListener('ended', function() {
+			self._jump();
+		});
+
+		$tw.rootWidget.addEventListener("bimlas-mediaplayer-change-source",function(event) {
+			self._play(event.tiddlerTitle);
+		});
+		$tw.rootWidget.addEventListener("bimlas-mediaplayer-jump-next",function() {
+			self._jump(1);
+		});
+		$tw.rootWidget.addEventListener("bimlas-mediaplayer-jump-prev",function() {
+			self._jump(-1);
+		});
 	};
 
 	exports["mediaplayer-updater"] = MediaplayerUpdaterWidget;

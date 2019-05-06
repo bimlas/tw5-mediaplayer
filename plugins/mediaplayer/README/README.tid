@@ -9,14 +9,13 @@ Play music, video continuously, without interruption.
 * https://gitlab.com/bimlas/tw5-mediaplayer (main repository)
 * https://github.com/bimlas/tw5-mediaplayer (mirror, please star if you like it)
 
-''Currently works only with audio player.''
-
 !! Usage
 
 * Make a new tiddler with the text `<<mediaplayer>>`, name it as you want
-* Add `$:/tags/SideBarSegment` tag and optionally set `list-after` field to `$:/core/ui/SideBarSegments/page-controls` to place it below of page control buttons
-* Open media file tiddlers or a tiddler that transcludes them - it only matters to see the player interface (see Examples tab)
-* Use the mediaplayer on the sidebar to navigate in media files
+** Add `$:/tags/SideBarSegment` tag and optionally set `list-after` field to `$:/core/ui/SideBarSegments/page-controls` to place it below of page control buttons
+* Use [[filter expression|https://tiddlywiki.com/static/Filters.html]] in the text entry to filter media tiddlers
+* Write your favourite filter expression (e.g. playlist) to the `filter` field of a tiddler with tag [[$:/tags/mediaplayer/playlist]], set up the `description` field as the title of the playlist (see [[$:/plugins/bimlas/media-player/playlists/all]] playlist for example)
+* Use the dropdown near the text entry to load playlists
 
 !! Installation instructions
 

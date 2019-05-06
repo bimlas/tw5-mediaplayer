@@ -4,6 +4,13 @@ type: text/vnd.tiddlywiki
 
 I'm trying to follow the rules of [[Semantic Versioning|https://semver.org/]].
 
+!! 0.2.0
+
+[[See GitLab for detailed change history of this release|https://gitlab.com/bimlas/tw5-disqus/compare/v0.1.1...v0.2.0]]
+
+* ''Convert to a "real" media player with a playlist''
+* Able to play videos as well
+
 !! 0.1.1
 
 [[See GitLab for detailed change history of this release|https://gitlab.com/bimlas/tw5-disqus/compare/v0.1.0...v0.1.1]]

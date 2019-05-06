@@ -1,0 +1,5 @@
+description: Video
+filter: [regexp:type[^video/]]
+tags: $:/tags/mediaplayer/playlist
+title: $:/plugins/bimlas/media-player/playlists/video
+

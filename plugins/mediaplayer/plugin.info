@@ -2,7 +2,7 @@
 	"title": "$:/plugins/bimlas/mediaplayer",
 	"description": "Mediaplayer: Play music, video continuously, without interruption",
 	"author": "bimlas",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"core-version": ">=5.1.18",
 	"source": "https://gitlab.com/bimlas/tw5-mediaplayer",
 	"plugin-type": "plugin",

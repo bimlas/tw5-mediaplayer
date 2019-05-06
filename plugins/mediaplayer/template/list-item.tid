@@ -1,0 +1,9 @@
+title: $:/plugins/bimlas/mediaplayer/template/list-item
+type: text/vnd.tiddlywiki
+
+<div class="bimlas-mediaplayer-list-item">
+<$button class="tc-btn-invisible" message="bimlas-mediaplayer-change-source">
+{{$:/plugins/bimlas/mediaplayer/images/play.svg}}
+<$view field="title"/>
+</$button>
+</div>
