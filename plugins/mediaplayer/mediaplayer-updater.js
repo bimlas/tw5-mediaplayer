@@ -28,15 +28,14 @@ Play music, video continuously, without interruption.
 		data.currentSource = tiddlerTitle;
 		this.wiki.setTiddlerData(this._stateTiddler, data);
 
-		if(!tiddlerTitle) {
+		var tiddler = this.wiki.getTiddler(tiddlerTitle);
+		if(!tiddler) {
 			this._player.pause();
 			this._player.currentTime = 0;
 			this._player.source = undefined;
 			this._player._tiddler = undefined;
 			return;
 		}
-
-		var tiddler = this.wiki.getTiddler(tiddlerTitle);
 
 		this._player._tiddler = tiddler.fields.title;
 		this._player.src = tiddler.fields._canonical_uri || tiddler.fields.title;
