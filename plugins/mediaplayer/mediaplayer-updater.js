@@ -41,8 +41,7 @@ Play music, video continuously, without interruption.
 	};
 
 	MediaplayerUpdaterWidget.prototype._jump = function(direction = 1) {
-		// TODO: Store filter in a common place
-		var playlist = this.wiki.filterTiddlers("[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]");
+		var playlist = this.wiki.filterTiddlers(this.getVariable("filterExpression"));
 
 		if(!playlist) return;
 

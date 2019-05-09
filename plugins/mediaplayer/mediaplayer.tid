@@ -3,43 +3,42 @@ title: $:/plugins/bimlas/mediaplayer/mediaplayer
 type: text/vnd.tiddlywiki
 
 \define mediaplayer()
-  [[Mediaplayer|$:/plugins/bimlas/mediaplayer]]<br/>
+  <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
 
-  <$mediaplayer-updater/>
+    [[Mediaplayer|$:/plugins/bimlas/mediaplayer]]<br/>
 
-  <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-prev">{{$:/plugins/bimlas/mediaplayer/images/backward.svg}}</$button>
-  <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-next">{{$:/plugins/bimlas/mediaplayer/images/forward.svg}}</$button>
-  <$checkbox tiddler="$:/state/bimlas/mediaplayer" index="repeat" checked="yes" unchecked="no" default="no">
-    <$button class="tc-btn-invisible">{{$:/plugins/bimlas/mediaplayer/images/repeat.svg}}</$button>
-  </$checkbox>
+    <$mediaplayer-updater/>
 
-  //<small>Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]</small>//<br/>
+    <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-prev">{{$:/plugins/bimlas/mediaplayer/images/backward.svg}}</$button>
+    <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-next">{{$:/plugins/bimlas/mediaplayer/images/forward.svg}}</$button>
+    <$checkbox tiddler="$:/state/bimlas/mediaplayer" index="repeat" checked="yes" unchecked="no" default="no">
+      <$button class="tc-btn-invisible">{{$:/plugins/bimlas/mediaplayer/images/repeat.svg}}</$button>
+    </$checkbox>
 
-  <$edit-text tiddler="$:/temp/bimlas/mediaplayer/playlist" type="search" tag="input" default="[search[]]"/>
-  <span class="tc-popup-keep">
-    <$button popup=<<qualify "$:/state/bimlas/mediaplayer/playlistDropdown">> class="tc-btn-invisible">
-      {{$:/core/images/down-arrow}}
-    </$button>
-  </span>
-  <$reveal state=<<qualify "$:/state/bimlas/mediaplayer/playlistDropdown">> type="popup" position="belowleft" animate="yes">
-    <$set name="tv-show-missing-links" value="yes">
-      <$linkcatcher to="$:/temp/bimlas/mediaplayer/playlist">
-        <div class="tc-block-dropdown-wrapper">
-          <div class="tc-block-dropdown tc-edit-type-dropdown">
-            <$list filter="[all[shadows+tiddlers]tag[$:/tags/mediaplayer/playlist]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
-            </$list>
+    //<small>Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]</small>//<br/>
+
+    <$edit-text tiddler="$:/temp/bimlas/mediaplayer/playlist" type="search" tag="input" default="[search[]]"/>
+    <span class="tc-popup-keep">
+      <$button popup=<<qualify "$:/state/bimlas/mediaplayer/playlistDropdown">> class="tc-btn-invisible">
+        {{$:/core/images/down-arrow}}
+      </$button>
+    </span>
+    <$reveal state=<<qualify "$:/state/bimlas/mediaplayer/playlistDropdown">> type="popup" position="belowleft" animate="yes">
+      <$set name="tv-show-missing-links" value="yes">
+        <$linkcatcher to="$:/temp/bimlas/mediaplayer/playlist">
+          <div class="tc-block-dropdown-wrapper">
+            <div class="tc-block-dropdown tc-edit-type-dropdown">
+              <$list filter="[all[shadows+tiddlers]tag[$:/tags/mediaplayer/playlist]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
+              </$list>
+            </div>
           </div>
-        </div>
-      </$linkcatcher>
-    </$set>
-  </$reveal>
-
-  <$reveal state="$:/temp/bimlas/mediaplayer/playlist" type="nomatch" text="">
-    <!-- TODO: Store filter in a common place -->
-    <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
+        </$linkcatcher>
+      </$set>
+    </$reveal>
+    <$reveal state="$:/temp/bimlas/mediaplayer/playlist" type="nomatch" text="">
       //<small><$count filter=<<filterExpression>>/> macthes</small>//
 
       <$list filter=<<filterExpression>> template="$:/plugins/bimlas/mediaplayer/template/list-item"/>
-    </$set>
-  </$reveal>
+    </$reveal>
+  </$set>
 \end
