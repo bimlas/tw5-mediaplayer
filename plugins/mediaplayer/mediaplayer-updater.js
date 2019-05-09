@@ -24,6 +24,10 @@ Play music, video continuously, without interruption.
 	MediaplayerUpdaterWidget.prototype = new Widget();
 
 	MediaplayerUpdaterWidget.prototype._play = function(tiddlerTitle) {
+		var data = this.wiki.getTiddlerData(this._stateTiddler, {});
+		data.currentSource = tiddlerTitle;
+		this.wiki.setTiddlerData(this._stateTiddler, data);
+
 		if(!tiddlerTitle) {
 			this._player.pause();
 			this._player.currentTime = 0;

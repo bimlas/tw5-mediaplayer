@@ -5,15 +5,13 @@ type: text/vnd.tiddlywiki
 \define mediaplayer()
   <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
 
-    [[Mediaplayer|$:/plugins/bimlas/mediaplayer]]<br/>
-
-    <$mediaplayer-updater/>
-
+    <$mediaplayer-updater/><br/>
     <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-prev">{{$:/plugins/bimlas/mediaplayer/images/backward.svg}}</$button>
     <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-next">{{$:/plugins/bimlas/mediaplayer/images/forward.svg}}</$button>
     <$checkbox tiddler="$:/state/bimlas/mediaplayer" index="repeat" checked="yes" unchecked="no" default="no">
       <$button class="tc-btn-invisible">{{$:/plugins/bimlas/mediaplayer/images/repeat.svg}}</$button>
     </$checkbox>
+    <$link to={{$:/state/bimlas/mediaplayer##currentSource}}>{{$:/state/bimlas/mediaplayer##currentSource}}</$link><br/>
 
     //<small>Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]</small>//<br/>
 
