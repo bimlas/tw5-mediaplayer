@@ -12,10 +12,10 @@ Play music, video continuously, without interruption.
 !! Usage
 
 * Make a new tiddler with the text `<<mediaplayer>>`, name it as you want
-** Add `$:/tags/SideBarSegment` tag and optionally set `list-after` field to `$:/core/ui/SideBarSegments/page-controls` to place it below of page control buttons
-* Use [[filter expression|https://tiddlywiki.com/static/Filters.html]] in the text entry to filter media tiddlers
-* Write your favourite filter expression (e.g. playlist) to the `filter` field of a tiddler with tag [[$:/tags/mediaplayer/playlist]], set up the `description` field as the title of the playlist (see [[$:/plugins/bimlas/media-player/playlists/all]] playlist for example)
-* Use the dropdown near the text entry to load playlists
+** It can be attached to the sidebar by adding the [[$:/tags/SideBarSegment]] tag to be easily accessible while browsing your notes
+* Use [[filter expression|https://tiddlywiki.com/static/Filters.html]] in the text entry to filter media tiddlers (for example `[search[Amon Tobin]]` or `[tag[Article]]`)
+* Write your favourite filter expression (e.g. playlist) to the `filter` field of a new tiddler, add [[$:/tags/mediaplayer/playlist]] tag to it, set up the `description` field as the title of the playlist (see [[$:/plugins/bimlas/media-player/playlists/all]] playlist for example)
+* Use the dropdown near the search entry to load playlists
 
 !! Installation instructions
 
