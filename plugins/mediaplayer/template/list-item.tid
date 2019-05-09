@@ -2,8 +2,13 @@ title: $:/plugins/bimlas/mediaplayer/template/list-item
 type: text/vnd.tiddlywiki
 
 <div class="bimlas-mediaplayer-list-item">
-<$button class="tc-btn-invisible" message="bimlas-mediaplayer-change-source">
+<$button class="tc-btn-invisible tc-tiddlylink" message="bimlas-mediaplayer-change-source">
+<$reveal type="match" default={{$:/state/bimlas/mediaplayer##currentSource}} text={{!!title}}>
 {{$:/plugins/bimlas/mediaplayer/images/play.svg}}
+</$reveal>
+<$reveal type="nomatch" default={{$:/state/bimlas/mediaplayer##currentSource}} text={{!!title}}>
+{{$:/core/images/blank}}
+</$reveal>
 <$view field="title"/>
 </$button>
 </div>
