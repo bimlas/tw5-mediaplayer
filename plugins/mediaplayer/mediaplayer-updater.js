@@ -33,11 +33,9 @@ Play music, video continuously, without interruption.
 			this._player.pause();
 			this._player.currentTime = 0;
 			this._player.source = undefined;
-			this._player._tiddler = undefined;
 			return;
 		}
 
-		this._player._tiddler = tiddler.fields.title;
 		this._player.src = tiddler.fields._canonical_uri || tiddler.fields.title;
 		this._player.currentTime = 0;
 		this._player.play();
@@ -48,7 +46,7 @@ Play music, video continuously, without interruption.
 
 		if(!playlist) return;
 
-		var tiddler = playlist[playlist.indexOf(this._player._tiddler) + direction];
+		var tiddler = playlist[playlist.indexOf(this.wiki.extractTiddlerDataItem(this._stateTiddler, "currentSource")) + direction];
 		var shouldRepeat = this.wiki.getTiddlerData(this._stateTiddler, {}).repeat === 'yes';
 		if(!tiddler && shouldRepeat) {
 			tiddler = direction === 1 ? playlist[0] : playlist[playlist.length-1];
