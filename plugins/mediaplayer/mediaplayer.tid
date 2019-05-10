@@ -2,12 +2,26 @@ tags: $:/tags/Macro
 title: $:/plugins/bimlas/mediaplayer/mediaplayer
 type: text/vnd.tiddlywiki
 
+\define jump-button(icon targetFilter repeatFilter)
+  <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer##repeat}}>
+    <$button class="tc-btn-invisible" set="$:/state/bimlas/mediaplayer##currentSource" setTo={{{ [subfilter<filterExpression>$targetFilter${$:/state/bimlas/mediaplayer##currentSource}] [subfilter<filterExpression>$repeatFilter$[]] +[first[]] }}}>
+      $icon$
+    </$button>
+  </$reveal>
+  <$reveal type="nomatch" default="yes" text={{$:/state/bimlas/mediaplayer##repeat}}>
+    <$button class="tc-btn-invisible" set="$:/state/bimlas/mediaplayer##currentSource" setTo={{{ [subfilter<filterExpression>$targetFilter${$:/state/bimlas/mediaplayer##currentSource}] }}}>
+      $icon$
+    </$button>
+  </$reveal>
+\end
+
 \define mediaplayer()
   <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
 
-    <$mediaplayer-updater/><br/>
-    <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-prev">{{$:/plugins/bimlas/mediaplayer/images/backward.svg}}</$button>
-    <$button class="tc-btn-invisible" message="bimlas-mediaplayer-jump-next">{{$:/plugins/bimlas/mediaplayer/images/forward.svg}}</$button>
+    <$mediaplayer-updater/>
+    <$transclude tiddler={{$:/state/bimlas/mediaplayer##currentSource}}/><br/>
+    <$macrocall $name="jump-button" icon={{$:/plugins/bimlas/mediaplayer/images/backward.svg}} targetFilter="before" repeatFilter="last"/>
+    <$macrocall $name="jump-button" icon={{$:/plugins/bimlas/mediaplayer/images/forward.svg}} targetFilter="after" repeatFilter="first"/>
     <$checkbox tiddler="$:/state/bimlas/mediaplayer" index="repeat" checked="yes" unchecked="no" default="no">
       <$button class="tc-btn-invisible">{{$:/plugins/bimlas/mediaplayer/images/repeat.svg}}</$button>
     </$checkbox>

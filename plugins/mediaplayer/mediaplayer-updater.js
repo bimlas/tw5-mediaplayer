@@ -27,43 +27,17 @@ Play music, video continuously, without interruption.
 		var data = this.wiki.getTiddlerData(this._stateTiddler, {});
 		data.currentSource = tiddlerTitle;
 		this.wiki.setTiddlerData(this._stateTiddler, data);
-
-		var tiddler = this.wiki.getTiddler(tiddlerTitle);
-		if(!tiddler) {
-			this._player.pause();
-			this._player.currentTime = 0;
-			this._player.source = undefined;
-			return;
-		}
-
-		this._player.src = tiddler.fields._canonical_uri || tiddler.fields.title;
-		this._player.currentTime = 0;
-		this._player.play();
-	};
-
-	MediaplayerUpdaterWidget.prototype._jump = function(direction = 1) {
-		var playlist = this.wiki.filterTiddlers(this.getVariable("filterExpression"));
-
-		if(!playlist) return;
-
-		var tiddler = playlist[playlist.indexOf(this.wiki.extractTiddlerDataItem(this._stateTiddler, "currentSource")) + direction];
-		var shouldRepeat = this.wiki.getTiddlerData(this._stateTiddler, {}).repeat === 'yes';
-		if(!tiddler && shouldRepeat) {
-			tiddler = direction === 1 ? playlist[0] : playlist[playlist.length-1];
-		}
-
-		this._play(tiddler);
 	};
 
 	/*
 	Render this widget into the DOM
 	*/
 	MediaplayerUpdaterWidget.prototype.render = function(parent,nextSibling) {
-		this.parentDomNode = parent;
-		this.computeAttributes();
+		// this.parentDomNode = parent;
+		// this.computeAttributes();
 		this.execute();
-		parent.insertBefore(this._player,nextSibling);
-		this.domNodes.push(this._player);
+		// parent.insertBefore(this._player,nextSibling);
+		// this.domNodes.push(this._player);
 	};
 
 	/*
@@ -71,25 +45,13 @@ Play music, video continuously, without interruption.
 	*/
 	MediaplayerUpdaterWidget.prototype.execute = function() {
 		var self = this;
-
 		this._stateTiddler = "$:/state/bimlas/mediaplayer";
-		this._player = this.document.createElement("video");
-		this._player.controls = true;
-		this._player.id = "bimlas-mediaplayer-widget";
 
-		this._player.addEventListener('ended', function() {
-			self._jump();
-		});
-
-		$tw.rootWidget.addEventListener("bimlas-mediaplayer-change-source",function(event) {
-			self._play(event.tiddlerTitle);
-		});
-		$tw.rootWidget.addEventListener("bimlas-mediaplayer-jump-next",function() {
-			self._jump(1);
-		});
-		$tw.rootWidget.addEventListener("bimlas-mediaplayer-jump-prev",function() {
-			self._jump(-1);
-		});
+		// TODO: Let it continue playing automatically
+		// TODO: Add a timeout setting for non-media tiddlers (e.g. images)
+		// this._player.addEventListener('ended', function() {
+		// 	self._play(???);
+		// });
 	};
 
 	exports["mediaplayer-updater"] = MediaplayerUpdaterWidget;
