@@ -18,10 +18,7 @@ type: text/vnd.tiddlywiki
 \define mediaplayer()
   <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
 
-    <$mediaplayer-updater/>
-    @@.bimlas-mediaplayer-player
-    <$transclude tiddler={{$:/state/bimlas/mediaplayer##currentSource}}/><br/>
-    @@
+    <$mediaplayer class="bimlas-mediaplayer-player" tiddler={{$:/state/bimlas/mediaplayer##currentSource}}/><br/>
     <$macrocall $name="jump-button" icon={{$:/plugins/bimlas/mediaplayer/images/backward.svg}} class="bimlas-mediaplayer-prev" targetFilter="before" repeatFilter="last"/>
     <$macrocall $name="jump-button" icon={{$:/plugins/bimlas/mediaplayer/images/forward.svg}} class="bimlas-mediaplayer-next" targetFilter="after" repeatFilter="first"/>
     <$wikify name="buttonClass" text="tc-btn-invisible bimlas-mediaplayer-repeat {{$:/state/bimlas/mediaplayer##repeat}}">
