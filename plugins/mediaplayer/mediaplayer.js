@@ -26,12 +26,29 @@ Play music, video continuously, without interruption.
 	/*
 	Render this widget into the DOM
 	*/
-	// TODO: Add event listener when updated, so call super.extend()
 	// TODO: Add class
-	// MediaplayerWidget.prototype.execute = function(parent,nextSibling) {
-	// 	parent.execute(parent,nextSibling);
-	// 	console.log(this.children);
-	// };
+	MediaplayerWidget.prototype.execute = function(parent,nextSibling) {
+		Transclude.prototype.execute.call(this,parent,nextSibling);
+
+		var self = this;
+		$tw.utils.nextTick(function() {
+			var domNode = self.findFirstDomNode();
+			if(domNode) {
+				console.log('DOM', domNode);
+				var clickEvent = this.document.createEvent("Events");
+				clickEvent.initEvent("click",true,false);
+				if(domNode.tagName === "AUDIO" || domNode.tagName === "VIDEO") {
+					domNode.addEventListener('ended',function() {
+						document.getElementsByClassName('bimlas-mediaplayer-next')[0].dispatchEvent(clickEvent);
+					});
+				} else {
+					setTimeout(function() {
+						document.getElementsByClassName('bimlas-mediaplayer-next')[0].dispatchEvent(clickEvent);
+					}, 3000);
+				}
+			}
+		});
+	};
 
 	exports["mediaplayer"] = MediaplayerWidget;
 
