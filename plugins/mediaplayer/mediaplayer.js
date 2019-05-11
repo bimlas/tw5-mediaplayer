@@ -34,17 +34,16 @@ Play music, video continuously, without interruption.
 		$tw.utils.nextTick(function() {
 			var domNode = self.findFirstDomNode();
 			if(domNode) {
-				console.log('DOM', domNode);
 				var clickEvent = this.document.createEvent("Events");
 				clickEvent.initEvent("click",true,false);
 				if(domNode.tagName === "AUDIO" || domNode.tagName === "VIDEO") {
 					domNode.addEventListener('ended',function() {
-						document.getElementsByClassName('bimlas-mediaplayer-next')[0].dispatchEvent(clickEvent);
+						document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
 					});
 				} else {
 					setTimeout(function() {
-						document.getElementsByClassName('bimlas-mediaplayer-next')[0].dispatchEvent(clickEvent);
-					}, 3000);
+						document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
+					}, self.wiki.extractTiddlerDataItem("$:/state/bimlas/mediaplayer", "timeout"));
 				}
 			}
 		});

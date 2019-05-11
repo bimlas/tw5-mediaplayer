@@ -25,6 +25,7 @@ type: text/vnd.tiddlywiki
       <$button class=<<buttonClass>> set="$:/state/bimlas/mediaplayer##repeat" setTo={{{ [[yes]] [[no]] -[{$:/state/bimlas/mediaplayer##repeat}] }}}>{{$:/plugins/bimlas/mediaplayer/images/repeat.svg}}</$button>
     </$wikify>
     <$link to={{$:/state/bimlas/mediaplayer##currentSource}}>{{$:/state/bimlas/mediaplayer##currentSource}}</$link><br/>
+    Timeout for non media tiddlers: <$edit-text tiddler="$:/state/bimlas/mediaplayer" index="timeout" tag="input"/>
 
     //<small>Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]</small>//<br/>
     <$edit-text tiddler="$:/temp/bimlas/mediaplayer/playlist" type="search" tag="input" default="[search[]]"/>
