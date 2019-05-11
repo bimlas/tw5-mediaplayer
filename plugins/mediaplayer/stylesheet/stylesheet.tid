@@ -1,0 +1,12 @@
+tags: $:/tags/Stylesheet
+title: $:/plugins/bimlas/mediaplayer/stylesheet/stylesheet
+type: text/vnd.tiddlywiki
+
+.bimlas-mediaplayer-repeat.yes svg {
+  fill: red;
+}
+
+.bimlas-mediaplayer-list {
+  max-height: 15em;
+  overflow-y: auto;
+}
