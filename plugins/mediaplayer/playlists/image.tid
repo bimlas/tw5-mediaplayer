@@ -1,0 +1,5 @@
+description: Image
+filter: [regexp:type[^image/]]
+tags: $:/tags/mediaplayer/playlist
+title: $:/plugins/bimlas/media-player/playlists/image
+

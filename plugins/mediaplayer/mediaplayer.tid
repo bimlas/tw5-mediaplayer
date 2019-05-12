@@ -5,7 +5,7 @@ type: text/vnd.tiddlywiki
 \define mediaplayer()
   <!-- Hide internal macros, do not make them globally available -->
   <$importvariables filter="[[$:/plugins/bimlas/mediaplayer/macros/button]]">
-    <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
+    <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video|image)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
 
       <$mediaplayer class="bimlas-mediaplayer-player" tiddler={{$:/state/bimlas/mediaplayer##currentSource}}/><br/>
       <<jump-button action:"prev" targetFilter:"before" repeatFilter:"last">>
