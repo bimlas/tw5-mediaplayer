@@ -1,10 +1,10 @@
-title: $:/plugins/bimlas/mediaplayer/template/list-item
+title: $:/plugins/bimlas/mediaplayer/templates/list-item
 type: text/vnd.tiddlywiki
 
 <div class="bimlas-mediaplayer-list-item">
 <$button class="tc-btn-invisible tc-tiddlylink" set="$:/state/bimlas/mediaplayer##currentSource" setTo={{!!title}}>
 <$reveal type="match" default={{$:/state/bimlas/mediaplayer##currentSource}} text={{!!title}}>
-{{$:/plugins/bimlas/mediaplayer/images/play.svg}}
+{{$:/plugins/bimlas/mediaplayer/images/play}}
 </$reveal>
 <$reveal type="nomatch" default={{$:/state/bimlas/mediaplayer##currentSource}} text={{!!title}}>
 {{$:/core/images/blank}}

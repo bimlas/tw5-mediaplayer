@@ -26,30 +26,31 @@ Play music, video continuously, without interruption.
 	/*
 	Render this widget into the DOM
 	*/
-	// TODO: Add class
 	MediaplayerWidget.prototype.execute = function(parent,nextSibling) {
 		Transclude.prototype.execute.call(this,parent,nextSibling);
 
 		var self = this;
+		self._stateTiddler = "$:/state/bimlas/mediaplayer";
+
 		$tw.utils.nextTick(function() {
 			var domNode = self.findFirstDomNode();
-			if(domNode) {
-				domNode.className = "bimlas-mediaplayer-player";
+			if(!domNode) return;
 
-				if(self.wiki.extractTiddlerDataItem("$:/state/bimlas/mediaplayer", "autoplay") !== "yes") return;
+			domNode.className = "bimlas-mediaplayer-player";
 
-				var clickEvent = this.document.createEvent("Events");
-				clickEvent.initEvent("click",true,false);
-				if(domNode.tagName === "AUDIO" || domNode.tagName === "VIDEO") {
-					domNode.play();
-					domNode.addEventListener('ended',function() {
-						document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
-					});
-				} else {
-					setTimeout(function() {
-						document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
-					}, self.wiki.extractTiddlerDataItem("$:/state/bimlas/mediaplayer", "timeout"));
-				}
+			if(self.wiki.extractTiddlerDataItem(self._stateTiddler, "play") !== "yes") return;
+
+			var clickEvent = this.document.createEvent("Events");
+			clickEvent.initEvent("click",true,false);
+			if(domNode.tagName === "AUDIO" || domNode.tagName === "VIDEO") {
+				domNode.play();
+				domNode.addEventListener('ended',function() {
+					document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
+				});
+			} else {
+				setTimeout(function() {
+					document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
+				}, self.wiki.extractTiddlerDataItem(self._stateTiddler, "timeout"));
 			}
 		});
 	};
@@ -59,7 +60,7 @@ Play music, video continuously, without interruption.
 	*/
 	MediaplayerWidget.prototype.refresh = function(changedTiddlers) {
 		var results = Transclude.prototype.refresh.call(this,changedTiddlers);
-		if ("$:/state/bimlas/mediaplayer" in changedTiddlers) {
+		if (this._stateTiddler in changedTiddlers) {
 			this.refreshSelf();
 			return true;
 		}
