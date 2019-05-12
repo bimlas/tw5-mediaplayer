@@ -2,7 +2,7 @@ tags: $:/tags/Stylesheet
 title: $:/plugins/bimlas/mediaplayer/stylesheet/stylesheet
 type: text/vnd.tiddlywiki
 
-.bimlas-mediaplayer-repeat.yes svg {
+.bimlas-mediaplayer-repeat.yes svg, .bimlas-mediaplayer-autoplay.yes svg {
   fill: red;
 }
 

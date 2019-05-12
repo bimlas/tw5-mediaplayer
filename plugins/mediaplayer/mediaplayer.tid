@@ -20,6 +20,9 @@ type: text/vnd.tiddlywiki
 
     <$mediaplayer class="bimlas-mediaplayer-player" tiddler={{$:/state/bimlas/mediaplayer##currentSource}}/><br/>
     <$macrocall $name="jump-button" icon={{$:/plugins/bimlas/mediaplayer/images/backward.svg}} class="bimlas-mediaplayer-prev" targetFilter="before" repeatFilter="last"/>
+    <$wikify name="buttonClass" text="tc-btn-invisible bimlas-mediaplayer-autoplay {{$:/state/bimlas/mediaplayer##autoplay}}">
+      <$button class=<<buttonClass>> set="$:/state/bimlas/mediaplayer##autoplay" setTo={{{ [[yes]] [[no]] -[{$:/state/bimlas/mediaplayer##autoplay}] }}}>{{$:/plugins/bimlas/mediaplayer/images/play.svg}}</$button>
+    </$wikify>
     <$macrocall $name="jump-button" icon={{$:/plugins/bimlas/mediaplayer/images/forward.svg}} class="bimlas-mediaplayer-next" targetFilter="after" repeatFilter="first"/>
     <$wikify name="buttonClass" text="tc-btn-invisible bimlas-mediaplayer-repeat {{$:/state/bimlas/mediaplayer##repeat}}">
       <$button class=<<buttonClass>> set="$:/state/bimlas/mediaplayer##repeat" setTo={{{ [[yes]] [[no]] -[{$:/state/bimlas/mediaplayer##repeat}] }}}>{{$:/plugins/bimlas/mediaplayer/images/repeat.svg}}</$button>

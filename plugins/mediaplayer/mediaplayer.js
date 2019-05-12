@@ -34,9 +34,14 @@ Play music, video continuously, without interruption.
 		$tw.utils.nextTick(function() {
 			var domNode = self.findFirstDomNode();
 			if(domNode) {
+				domNode.className = "bimlas-mediaplayer-player";
+
+				if(self.wiki.extractTiddlerDataItem("$:/state/bimlas/mediaplayer", "autoplay") !== "yes") return;
+
 				var clickEvent = this.document.createEvent("Events");
 				clickEvent.initEvent("click",true,false);
 				if(domNode.tagName === "AUDIO" || domNode.tagName === "VIDEO") {
+					domNode.play();
 					domNode.addEventListener('ended',function() {
 						document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
 					});
@@ -47,6 +52,18 @@ Play music, video continuously, without interruption.
 				}
 			}
 		});
+	};
+
+	/*
+	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+	*/
+	MediaplayerWidget.prototype.refresh = function(changedTiddlers) {
+		var results = Transclude.prototype.refresh.call(this,changedTiddlers);
+		if ("$:/state/bimlas/mediaplayer" in changedTiddlers) {
+			this.refreshSelf();
+			return true;
+		}
+		return results;
 	};
 
 	exports["mediaplayer"] = MediaplayerWidget;
