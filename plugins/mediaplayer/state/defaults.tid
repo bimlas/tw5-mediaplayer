@@ -1,0 +1,6 @@
+title: $:/state/bimlas/mediaplayer
+type: application/json
+
+{
+    "timeout": "5"
+}

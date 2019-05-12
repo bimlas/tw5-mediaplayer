@@ -50,7 +50,7 @@ Play music, video continuously, without interruption.
 			} else {
 				setTimeout(function() {
 					document.getElementsByClassName("bimlas-mediaplayer-next")[0].dispatchEvent(clickEvent);
-				}, self.wiki.extractTiddlerDataItem(self._stateTiddler, "timeout"));
+				}, self.wiki.extractTiddlerDataItem(self._stateTiddler, "timeout") * 1000);
 			}
 		});
 	};
