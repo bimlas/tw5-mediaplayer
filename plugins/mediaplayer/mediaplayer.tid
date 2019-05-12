@@ -6,14 +6,16 @@ type: text/vnd.tiddlywiki
   <!-- Hide internal macros, do not make them globally available -->
   <$importvariables filter="[[$:/plugins/bimlas/mediaplayer/macros/button]]">
     <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video|image)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
+      <p>
+        <<jump-button action:"prev" targetFilter:"before" repeatFilter:"last">>
+        <<toggle-button action:"play">>
+        <<jump-button action:"next" targetFilter:"after" repeatFilter:"first">>
+        <<toggle-button action:"repeat">>
+        <$edit-text tiddler="$:/state/bimlas/mediaplayer" index="timeout" tag="input" size="2"/> second timeout for images<br/>
+        <$link to={{$:/state/bimlas/mediaplayer##currentSource}}>{{$:/state/bimlas/mediaplayer##currentSource}}</$link>
+      </p>
 
       <$mediaplayer class="bimlas-mediaplayer-player" tiddler={{$:/state/bimlas/mediaplayer##currentSource}}/><br/>
-      <<jump-button action:"prev" targetFilter:"before" repeatFilter:"last">>
-      <<toggle-button action:"play">>
-      <<jump-button action:"next" targetFilter:"after" repeatFilter:"first">>
-      <<toggle-button action:"repeat">>
-      <$link to={{$:/state/bimlas/mediaplayer##currentSource}}>{{$:/state/bimlas/mediaplayer##currentSource}}</$link><br/>
-      <$edit-text tiddler="$:/state/bimlas/mediaplayer" index="timeout" tag="input" size="2"/> second timeout for images
 
       //<small>Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]</small>//<br/>
       <$edit-text tiddler="$:/temp/bimlas/mediaplayer/playlist" type="search" tag="input" default="[search[]]"/>
