@@ -36,7 +36,7 @@ Play music, video continuously, without interruption.
 			var domNode = self.findFirstDomNode();
 			if(!domNode) return;
 
-			domNode.className = "bimlas-mediaplayer-player";
+			domNode.classList.add("bimlas-mediaplayer-player");
 
 			if(self.wiki.extractTiddlerDataItem(self._stateTiddler, "play") !== "yes") return;
 
