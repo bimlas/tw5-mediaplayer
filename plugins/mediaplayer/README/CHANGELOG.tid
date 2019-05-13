@@ -4,6 +4,14 @@ type: text/vnd.tiddlywiki
 
 I'm trying to follow the rules of [[Semantic Versioning|https://semver.org/]].
 
+!! 0.3.0
+
+[[See GitLab for detailed change history of this release|https://gitlab.com/bimlas/tw5-disqus/compare/v0.2.1...v0.3.0]]
+
+* Display images as slideshow with adjustable timeout
+* Autoplay is optional
+* Improve design
+
 !! 0.2.1
 
 [[See GitLab for detailed change history of this release|https://gitlab.com/bimlas/tw5-disqus/compare/v0.2.0...v0.2.1]]
