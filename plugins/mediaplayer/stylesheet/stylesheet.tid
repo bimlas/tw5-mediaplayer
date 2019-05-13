@@ -8,5 +8,4 @@ type: text/vnd.tiddlywiki
 
 .bimlas-mediaplayer-list {
   max-height: 15em;
-  overflow-y: auto;
 }

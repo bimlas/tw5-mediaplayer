@@ -37,9 +37,11 @@ type: text/vnd.tiddlywiki
         </$set>
       </$reveal>
 
-      <$reveal tag="div" class="bimlas-mediaplayer-list" state="$:/temp/bimlas/mediaplayer/playlist" type="nomatch" text="">
+      <$reveal tag="div" state="$:/temp/bimlas/mediaplayer/playlist" type="nomatch" text="">
         //<small><$count filter=<<filterExpression>>/> macthes</small>//
-        <$list filter=<<filterExpression>> template="$:/plugins/bimlas/mediaplayer/templates/list-item"/>
+        <$scrollable class="bimlas-mediaplayer-list">
+          <$list filter=<<filterExpression>> template="$:/plugins/bimlas/mediaplayer/templates/list-item"/>
+        </$scrollable>
       </$reveal>
 
     </$set>
