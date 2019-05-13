@@ -1,5 +1,5 @@
 description: All media
 filter: [search[]]
-tags: $:/tags/mediaplayer/playlist
-title: $:/plugins/bimlas/media-player/playlists/all
+tags: $:/tags/bimlas/mediaplayer/playlist
+title: $:/plugins/bimlas/mediaplayer/playlists/all
 

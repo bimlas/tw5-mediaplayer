@@ -1,5 +1,5 @@
 description: Audio
 filter: [regexp:type[^audio/]]
-tags: $:/tags/mediaplayer/playlist
-title: $:/plugins/bimlas/media-player/playlists/videos
+tags: $:/tags/bimlas/mediaplayer/playlist
+title: $:/plugins/bimlas/mediaplayer/playlists/videos
 
