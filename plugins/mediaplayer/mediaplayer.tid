@@ -6,50 +6,20 @@ type: text/vnd.tiddlywiki
 
 \define mediaplayer()
   <!-- Hide internal macros, do not make them globally available -->
-  <$importvariables filter="[[$:/plugins/bimlas/mediaplayer/macros/button]]">
-    <$set name="filterExpression" value="""[all[shadows+tiddlers]regexp:type[^(audio|video|image)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
+  <$importvariables filter="[[$:/plugins/bimlas/mediaplayer/macros/main-elements]]">
+    <$set name="filter-media-tiddlers" value="""[all[shadows+tiddlers]regexp:type[^(audio|video|image)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
 
-      <<jump-button action:"prev" targetFilter:"before" repeatFilter:"last">> <<toggle-button action:"play">>
-      <<jump-button action:"next" targetFilter:"after" repeatFilter:"first">> <<toggle-button action:"repeat">>
-      <<toggle-button action:"show-settings">>
+      <<show-buttons>>
 
-      <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer##show-settings}}>
-        <$edit-text tiddler="$:/state/bimlas/mediaplayer" index="timeout" tag="input" size="2"/> second timeout for images
-      </$reveal>
+      <<show-timeout>>
 
-      <$link to={{$:/state/bimlas/mediaplayer##currentSource}}>{{$:/state/bimlas/mediaplayer##currentSource}}</$link>
+      <<show-title>>
 
-      <$mediaplayer class="bimlas-mediaplayer-player" tiddler={{$:/state/bimlas/mediaplayer##currentSource}}/>
+      <<show-player>>
 
-      <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer##show-settings}}>
-        //<small>Search via a [[filter expression|https://tiddlywiki.com/static/Filters.html]]</small>//<br/>
-        <$edit-text tiddler="$:/temp/bimlas/mediaplayer/playlist" type="search" tag="input" default="[search[]]"/>
-        <span class="tc-popup-keep">
-          <$button popup=<<qualify "$:/state/bimlas/mediaplayer/playlistDropdown">> class="tc-btn-invisible">
-            {{$:/core/images/down-arrow}}
-          </$button>
-        </span>
-        <$reveal state=<<qualify "$:/state/bimlas/mediaplayer/playlistDropdown">> type="popup" position="belowleft" animate="yes">
-          <$set name="tv-show-missing-links" value="yes">
-            <$linkcatcher to="$:/temp/bimlas/mediaplayer/playlist">
-              <div class="tc-block-dropdown-wrapper">
-                <div class="tc-block-dropdown tc-edit-type-dropdown">
-                  <$list filter="[all[shadows+tiddlers]tag[$:/tags/bimlas/mediaplayer/playlist]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
-                  </$list>
-                </div>
-              </div>
-            </$linkcatcher>
-          </$set>
-        </$reveal>
-
-        <$reveal tag="div" state="$:/temp/bimlas/mediaplayer/playlist" type="nomatch" text="">
-          //<small><$count filter=<<filterExpression>>/> macthes</small>//
-          <$scrollable class="bimlas-mediaplayer-list">
-            <$list filter=<<filterExpression>> template="$:/plugins/bimlas/mediaplayer/templates/list-item"/>
-          </$scrollable>
-        </$reveal>
-      </$reveal>
+      <<show-settings>>
 
     </$set>
   </$importvariables>
 \end
+
