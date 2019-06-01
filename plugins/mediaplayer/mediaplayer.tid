@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 \define mediaplayer()
   <!-- Hide internal macros, do not make them globally available -->
-  <$importvariables filter="[[$:/plugins/bimlas/mediaplayer/macros/main-elements]]">
+  <$importvariables filter="[[$:/plugins/bimlas/mediaplayer/macros/ui]]">
     <$set name="filter-media-tiddlers" value="""[all[shadows+tiddlers]regexp:type[^(audio|video|image)/]subfilter{$:/temp/bimlas/mediaplayer/playlist}]""">
 
       <<show-buttons>>
