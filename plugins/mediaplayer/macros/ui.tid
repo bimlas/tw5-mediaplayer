@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define show-timeout()
-  <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer##show-settings}} >
+  <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer/toggle##show-settings}} >
     <$edit-text tiddler="$:/state/bimlas/mediaplayer" index="timeout" tag="input" size="2"/> second timeout for images
   </$reveal>
 \end
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define show-settings()
-  <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer##show-settings}} >
+  <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer/toggle##show-settings}} >
     <<show-search>>
     <<show-playlist-loader>>
 
@@ -73,13 +73,13 @@ type: text/vnd.tiddlywiki
 \end
 
 \define jump-button(action targetFilter repeatFilter)
-  <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer##repeat}}>
+  <$reveal type="match" default="yes" text={{$:/state/bimlas/mediaplayer/toggle##repeat}}>
     <$button class="bimlas-mediaplayer-$action$" set="$:/state/bimlas/mediaplayer##currentSource"
       setTo={{{ [subfilter<filter-media-tiddlers>$targetFilter${$:/state/bimlas/mediaplayer##currentSource}] [subfilter<filter-media-tiddlers>$repeatFilter$[]] +[first[]] }}}>
       {{$:/plugins/bimlas/mediaplayer/images/$action$}}
     </$button>
   </$reveal>
-  <$reveal type="nomatch" default="yes" text={{$:/state/bimlas/mediaplayer##repeat}}>
+  <$reveal type="nomatch" default="yes" text={{$:/state/bimlas/mediaplayer/toggle##repeat}}>
     <$button class="bimlas-mediaplayer-$action$" set="$:/state/bimlas/mediaplayer##currentSource"
       setTo={{{ [subfilter<filter-media-tiddlers>$targetFilter${$:/state/bimlas/mediaplayer##currentSource}] }}}>
       {{$:/plugins/bimlas/mediaplayer/images/$action$}}
@@ -88,9 +88,9 @@ type: text/vnd.tiddlywiki
 \end
 
 \define toggle-button(action)
-  <$wikify name="buttonClass" text="bimlas-mediaplayer-$action$ {{$:/state/bimlas/mediaplayer##$action$}}">
-    <$button class=<<buttonClass>> set="$:/state/bimlas/mediaplayer##$action$"
-      setTo={{{ [[yes]] [[no]] -[{$:/state/bimlas/mediaplayer##$action$}] }}}>{{$:/plugins/bimlas/mediaplayer/images/$action$}}
+  <$wikify name="buttonClass" text="bimlas-mediaplayer-$action$ {{$:/state/bimlas/mediaplayer/toggle##$action$}}">
+    <$button class=<<buttonClass>> set="$:/state/bimlas/mediaplayer/toggle##$action$"
+      setTo={{{ [[yes]] [[no]] -[{$:/state/bimlas/mediaplayer/toggle##$action$}] }}}>{{$:/plugins/bimlas/mediaplayer/images/$action$}}
     </$button>
   </$wikify>
 \end

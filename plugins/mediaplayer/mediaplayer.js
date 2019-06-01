@@ -31,6 +31,7 @@ Play music, video continuously, without interruption.
 
 		var self = this;
 		self._stateTiddler = "$:/state/bimlas/mediaplayer";
+		self._toggleStateTiddler = "$:/state/bimlas/mediaplayer/toggle";
 
 		$tw.utils.nextTick(function() {
 			var domNode = self.findFirstDomNode();
@@ -38,7 +39,7 @@ Play music, video continuously, without interruption.
 
 			domNode.classList.add("bimlas-mediaplayer-player");
 
-			if(self.wiki.extractTiddlerDataItem(self._stateTiddler, "play") !== "yes") return;
+			if(self.wiki.extractTiddlerDataItem(self._toggleStateTiddler, "play") !== "yes") return;
 
 			var clickEvent = this.document.createEvent("Events");
 			clickEvent.initEvent("click",true,false);
